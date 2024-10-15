@@ -1,4 +1,3 @@
-
 ### Funciones de orden superior ###
 '''  
 ## Función como parámetro
@@ -80,7 +79,7 @@ def print_full_name(first_name, last_name, country):
         first_name, last_name, country))
 
 print_full_name("Asabeneh", "Yetayeh",'Finland')
-'''
+
 # Decorador que agrega un signo de exclamación al resultado
 def add_exclamation_decorator(function):
     def wrapper():
@@ -186,64 +185,182 @@ numeros = [1, 2, 3, 4, 5]
 resultado = reduce(multiplicar, numeros)
 
 print(resultado)  # Salida: 120
-
+'''
 
 #### Exercises: Day 14 ####
 
 ### Exercises: Level 1
 
 #1
-
+'Map: Aplica una funcion a un iterable, devolviendo una lista de valores'
+'Filter: Aplica una funcion a un iterable aplicando una condicion'
+'Reduce: Aplica una funcion a un iterable, devolviendo un unico valor'
 
 #2
-
+'Higher order function: Es una funcion cuyo parametro es otra funcio o/y devuelve una funcion como resultado'
+'Closure: Es una funcion que funciona con los parametres de su funcion principal'
+'Decorator: Funcion que envuelve a otra funcion, agregando una funcionalidad sin modifica su estructura'
 
 #3
+countries = ['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland','España']
+names = ['Asabeneh', 'Lidiya', 'Ermias', 'Abraham']
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def sumar(x):
+    return x+x
 
+sumar_lista = map(sumar,numbers)
 
+print(list(sumar_lista))
+
+def filtrado(x):
+    if len(x) > 6:
+        return True
+    return False
+
+paises_grandes = filter(filtrado,countries)
+
+print(list(paises_grandes))
+
+def multiplicar(x,y):
+    return x*y
+
+from functools import  reduce
+
+total_multiplicacion = reduce(multiplicar,numbers)
+
+print(total_multiplicacion)
+'''
 #4
-
+for element in countries:
+    print(element)
 
 #5
-
+for element in names:
+    print(element)
 
 #6
-
-
+for element in numbers:
+    print(element)
+'''
 ### Exercises: Level 2
 
 #1
+def mayusc(x):
+    return x.upper()
 
+list_upper = map(mayusc, countries)
+
+print(list(list_upper))
 
 #2
+def square(x):
+    return x**2
+
+list_square = map(square, numbers)
+
+print(list(list_square))
 
 
 #3
+name_upper = map(mayusc, names)
 
+print(list(name_upper))
 
 #4
+def filtrado(x):
+    if 'land' in x:
+        return True
+    return False
 
+land_list = filter(filtrado,countries)
+
+print(list(land_list))
+
+def filtrado_revertido(x):
+    return not filtrado(x)
+
+land_list_out = filter(filtrado_revertido,countries)
+
+print(list(land_list_out))
+
+def rev_filt(x):
+    def fil(x):
+        if 'land' in x:
+            return True
+        return False
+    return not fil(x)
+
+land_out = filter(rev_filt,countries)
+
+print(list(land_out))
 
 #5
+def cant_letras(x):
+    if len(x) == 6:
+        return True
+    return False
 
+paises_de_6_letras = filter(cant_letras,countries)
+
+print(list(paises_de_6_letras))
 
 #6
+def mas_letras(x):
+    if len(x) >= 6:
+        return True
+    return False
 
+paises_mas_6_letras = filter(mas_letras,countries)
+
+print(list(paises_mas_6_letras))
 
 #7
+def E_funtion(x):
+    if x[0:1] == "E":
+        return True
+    return False
 
+paises_que_empiezan_con_e = filter(E_funtion,countries)
+
+print(list(paises_que_empiezan_con_e))
 
 #8
 
+muchas_funciones = map(mayusc, filter(rev_filt,countries))
+
+print(list(muchas_funciones))
 
 #9
+varios_list = ['Estonia', 'Finland',1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Sweden', 'Denmark', 'Norway', 'Iceland','Asabeneh', 'Lidiya', 'Ermias', 'Abraham']
 
+def get_string_lists(lista):
+    def is_str(lista):
+        if type(lista) == str:
+            return True
+        return False
+    list_str = filter(is_str,lista)
+    return list(list_str)
+
+print(get_string_lists(varios_list))
 
 #10
+def sumar(x,y):
+    return x + y
+total_sum = reduce(sumar,numbers)
+
+print(total_sum)
 
 
 #11
+def concat(lista):
+    ultimo_elemento_len = len(lista[-1])
+    ultimo_elemento = lista[-1]
+    def lista_concat(x,y):
+        return f'{x}, {y}'
+    lista_concatenada = reduce(lista_concat,lista)
+    return f'{lista_concatenada[:-ultimo_elemento_len]}y {ultimo_elemento} son paises del norte de Europa'
 
+print(concat(countries))
 
 #12
 
